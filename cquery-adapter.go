@@ -10,8 +10,8 @@ import (
 func readStdinSendConn(tcpConn net.Conn, logPath *string) {
 	var buffer [6 * 1024 * 1024]byte
 	var flog *os.File
-	if logPath != nil || len(*logPath) == 0 {
-		flog, _ := os.OpenFile(*logPath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	if logPath != nil && len(*logPath) > 0 {
+		flog, _ = os.OpenFile(*logPath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 		defer flog.Close()
 	}
 
@@ -35,8 +35,8 @@ func readStdinSendConn(tcpConn net.Conn, logPath *string) {
 func recvConnWriteStdout(tcpConn net.Conn, logPath *string) {
 	var buffer [6 * 1024 * 1024]byte
 	var flog *os.File
-	if logPath != nil || len(*logPath) == 0 {
-		flog, _ := os.OpenFile(*logPath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	if logPath != nil && len(*logPath) > 0 {
+		flog, _ = os.OpenFile(*logPath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 		defer flog.Close()
 	}
 
